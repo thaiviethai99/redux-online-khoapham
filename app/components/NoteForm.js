@@ -1,9 +1,20 @@
 import React from 'react';
 
-class Hello extends React.Component{
+class NoteForm extends React.Component{
+  handleSubmit(e){
+    e.preventDefault();
+    this.props.handleAdd(this.refs.txt.value);
+    this.refs.txt.value = '';
+  }
   render(){
-    return <h1>Hello component</h1>
+    return (
+      <form onSubmit={this.handleSubmit.bind(this)}>
+        <input type="text" placeholder="Enter your text" ref="txt"/>
+        <br/><br/>
+        <button>Add</button>
+      </form>
+    )
   }
 }
 
-module.exports = Hello;
+module.exports = NoteForm;

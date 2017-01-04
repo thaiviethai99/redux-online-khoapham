@@ -48,7 +48,7 @@
 
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(32);
-	var List = __webpack_require__(179);
+	var List = __webpack_require__(178);
 
 	ReactDOM.render(React.createElement(List, null), document.getElementById('root'));
 
@@ -21466,8 +21466,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 178 */,
-/* 179 */
+/* 178 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21478,9 +21477,13 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Note = __webpack_require__(180);
+	var _Note = __webpack_require__(179);
 
 	var _Note2 = _interopRequireDefault(_Note);
+
+	var _NoteForm = __webpack_require__(180);
+
+	var _NoteForm2 = _interopRequireDefault(_NoteForm);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21509,6 +21512,12 @@
 	      this.setState(this.state);
 	    }
 	  }, {
+	    key: 'addNote',
+	    value: function addNote(note) {
+	      this.state.mang.push(note);
+	      this.setState(this.state);
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var _this2 = this;
@@ -21516,6 +21525,7 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
+	        _react2.default.createElement(_NoteForm2.default, { handleAdd: this.addNote.bind(this) }),
 	        this.state.mang.map(function (e, i) {
 	          return _react2.default.createElement(
 	            _Note2.default,
@@ -21535,7 +21545,7 @@
 	module.exports = List;
 
 /***/ },
-/* 180 */
+/* 179 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21596,6 +21606,65 @@
 	}(_react2.default.Component);
 
 	module.exports = Note;
+
+/***/ },
+/* 180 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var NoteForm = function (_React$Component) {
+	  _inherits(NoteForm, _React$Component);
+
+	  function NoteForm() {
+	    _classCallCheck(this, NoteForm);
+
+	    return _possibleConstructorReturn(this, (NoteForm.__proto__ || Object.getPrototypeOf(NoteForm)).apply(this, arguments));
+	  }
+
+	  _createClass(NoteForm, [{
+	    key: 'handleSubmit',
+	    value: function handleSubmit(e) {
+	      e.preventDefault();
+	      this.props.handleAdd(this.refs.txt.value);
+	      this.refs.txt.value = '';
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'form',
+	        { onSubmit: this.handleSubmit.bind(this) },
+	        _react2.default.createElement('input', { type: 'text', placeholder: 'Enter your text', ref: 'txt' }),
+	        _react2.default.createElement('br', null),
+	        _react2.default.createElement('br', null),
+	        _react2.default.createElement(
+	          'button',
+	          null,
+	          'Add'
+	        )
+	      );
+	    }
+	  }]);
+
+	  return NoteForm;
+	}(_react2.default.Component);
+
+	module.exports = NoteForm;
 
 /***/ }
 /******/ ]);
