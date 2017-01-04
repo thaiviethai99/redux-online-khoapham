@@ -46,11 +46,34 @@
 
 	'use strict';
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(32);
 	var List = __webpack_require__(178);
 
 	ReactDOM.render(React.createElement(List, null), document.getElementById('root'));
+
+	/*
+	toan tu ...
+	pure function
+	*/
+
+	var obj = {
+	  name: 'KhoaPham',
+	  age: 18
+	};
+
+	var obj2 = _extends({}, obj, { age: 35 });
+
+	obj.age = 30;
+	//console.log(obj2);
+
+	var mang = [5, 3, 8, 5];
+	var arr = [7, 6].concat(mang, [9, 0]);
+	mang[0] = 1000;
+	console.log('Array: ', arr);
+	console.log('Mang: ', mang);
 
 /***/ },
 /* 1 */
