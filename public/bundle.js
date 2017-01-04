@@ -21630,10 +21630,13 @@
 	var NoteForm = function (_React$Component) {
 	  _inherits(NoteForm, _React$Component);
 
-	  function NoteForm() {
+	  function NoteForm(props) {
 	    _classCallCheck(this, NoteForm);
 
-	    return _possibleConstructorReturn(this, (NoteForm.__proto__ || Object.getPrototypeOf(NoteForm)).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, (NoteForm.__proto__ || Object.getPrototypeOf(NoteForm)).call(this, props));
+
+	    _this.state = { isAdding: false };
+	    return _this;
 	  }
 
 	  _createClass(NoteForm, [{
@@ -21642,11 +21645,18 @@
 	      e.preventDefault();
 	      this.props.handleAdd(this.refs.txt.value);
 	      this.refs.txt.value = '';
+	      this.toggle();
+	    }
+	  }, {
+	    key: 'toggle',
+	    value: function toggle() {
+	      this.state.isAdding = !this.state.isAdding;
+	      this.setState(this.state);
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement(
+	      if (this.state.isAdding) return _react2.default.createElement(
 	        'form',
 	        { onSubmit: this.handleSubmit.bind(this) },
 	        _react2.default.createElement('input', { type: 'text', placeholder: 'Enter your text', ref: 'txt' }),
@@ -21657,6 +21667,11 @@
 	          null,
 	          'Add'
 	        )
+	      );
+	      return _react2.default.createElement(
+	        'button',
+	        { onClick: this.toggle.bind(this) },
+	        '+'
 	      );
 	    }
 	  }]);
