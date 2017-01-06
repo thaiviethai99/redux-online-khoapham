@@ -21566,6 +21566,8 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactRedux = __webpack_require__(203);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21588,9 +21590,9 @@
 	    value: function removeNote() {
 	      var _props = this.props,
 	          index = _props.index,
-	          handleRemove = _props.handleRemove;
+	          dispatch = _props.dispatch;
 
-	      handleRemove(index);
+	      dispatch({ type: 'REMOVE_ITEM', index: index });
 	    }
 	  }, {
 	    key: 'render',
@@ -21615,7 +21617,7 @@
 	  return Note;
 	}(_react2.default.Component);
 
-	module.exports = Note;
+	module.exports = (0, _reactRedux.connect)()(Note);
 
 /***/ },
 /* 180 */
@@ -21629,6 +21631,8 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactRedux = __webpack_require__(203);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21640,33 +21644,32 @@
 	var NoteForm = function (_React$Component) {
 	  _inherits(NoteForm, _React$Component);
 
-	  function NoteForm(props) {
+	  function NoteForm() {
 	    _classCallCheck(this, NoteForm);
 
-	    var _this = _possibleConstructorReturn(this, (NoteForm.__proto__ || Object.getPrototypeOf(NoteForm)).call(this, props));
-
-	    _this.state = { isAdding: false };
-	    return _this;
+	    return _possibleConstructorReturn(this, (NoteForm.__proto__ || Object.getPrototypeOf(NoteForm)).apply(this, arguments));
 	  }
 
 	  _createClass(NoteForm, [{
 	    key: 'handleSubmit',
 	    value: function handleSubmit(e) {
 	      e.preventDefault();
-	      this.props.handleAdd(this.refs.txt.value);
-	      this.refs.txt.value = '';
-	      this.toggle();
+	      var dispatch = this.props.dispatch;
+
+	      dispatch({ type: 'ADD_ITEM', item: this.refs.txt.value });
+	      dispatch({ type: 'TOGGLE_IS_ADDING' });
 	    }
 	  }, {
 	    key: 'toggle',
 	    value: function toggle() {
-	      this.state.isAdding = !this.state.isAdding;
-	      this.setState(this.state);
+	      var dispatch = this.props.dispatch;
+
+	      dispatch({ type: 'TOGGLE_IS_ADDING' });
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      if (this.state.isAdding) return _react2.default.createElement(
+	      if (this.props.isAdding) return _react2.default.createElement(
 	        'form',
 	        { onSubmit: this.handleSubmit.bind(this) },
 	        _react2.default.createElement('input', { type: 'text', placeholder: 'Enter your text', ref: 'txt' }),
@@ -21689,7 +21692,9 @@
 	  return NoteForm;
 	}(_react2.default.Component);
 
-	module.exports = NoteForm;
+	module.exports = (0, _reactRedux.connect)(function (state) {
+	  return { isAdding: state.isAdding };
+	})(NoteForm);
 
 /***/ },
 /* 181 */
@@ -21755,18 +21760,6 @@
 	}));
 	store.subscribe(function () {
 	  var str = store.getState();
-	});
-
-	store.dispatch({ type: 'TOGGLE_IS_ADDING' });
-
-	store.dispatch({
-	  type: 'ADD_ITEM',
-	  item: 'Unity'
-	});
-
-	store.dispatch({
-	  type: 'REMOVE_ITEM',
-	  index: 1
 	});
 
 	module.exports = store;
