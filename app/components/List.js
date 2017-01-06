@@ -1,12 +1,9 @@
 import React from 'react';
 import Note from './Note.js';
 import NoteForm from './NoteForm.js';
-class List extends React.Component{
-  constructor(props){
-    super(props);
-    this.state = {mang: ['Android', 'iOS', 'NodeJS']}
-  }
+import {connect} from 'react-redux';
 
+class List extends React.Component{
   remove(index){
     this.state.mang.splice(index, 1);
     this.setState(this.state);
@@ -21,7 +18,7 @@ class List extends React.Component{
     return (
       <div>
         <NoteForm handleAdd={this.addNote.bind(this)}/>
-        {this.state.mang.map((e, i) => <Note index={i}
+        {this.props.mang.map((e, i) => <Note index={i}
           handleRemove={this.remove.bind(this)}
           key={i}>{e}</Note>)}
       </div>
@@ -29,4 +26,6 @@ class List extends React.Component{
   }
 }
 
-module.exports = List;
+module.exports = connect(function(state){
+  return {mang: state.mang}
+})(List);
