@@ -22,4 +22,20 @@ var store = redux.createStore(reducer, redux.compose(
 store.subscribe(() => {
   var str = store.getState();
 });
+<<<<<<< HEAD:app/storeConf.js
+=======
+
+store.dispatch({type: 'TOGGLE_IS_ADDING'});
+
+store.dispatch({
+  type: 'ADD_ITEM',
+  item: 'Unity'
+});
+
+store.dispatch({
+  type: 'REMOVE_ITEM',
+  index: 1
+});
+
+>>>>>>> parent of 6a546f9... xong 15:app/examples.js
 module.exports = store;
